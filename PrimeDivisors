@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define N 5000
+
+bool isPrime(int i)
+{
+    for(int j = 3; j*j <= i; j += 2)
+    {
+        if(i % j == 0)
+            return false;
+    }
+    return true;
+}
+
+int main()
+{
+    cout << "2 ";
+    for(int i = 3; i <= N; i += 2)
+    {
+        if(isPrime(i))
+            cout << i << " ";
+    }
+    return 0;
+}
