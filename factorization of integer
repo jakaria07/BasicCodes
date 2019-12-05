@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define SIZE 100000
+vector<int> prime;
+vector<int> factors;
+long long sieve[SIZE];
+
+void primeSieve(int n)
+{
+    sieve[0] = sieve[1] = 1;
+    prime.push_back(2);
+    for(int i = 4; i <= n; i += 2)
+    {
+        sieve[i] = 1;
+    }
+    for(int i = 3; i*i <= n; i += 2)
+    {
+        if(sieve[i] == 0)
+        {
+            for(int j = i*i; j <= n; j += 2*i)
+            {
+                sieve[j] = 1;
+            }
+        }
+    }
+    for(int i = 3; i <= n; i += 2)
+    {
+        if(sieve[i] == 0)
+        {
+            prime.push_back(i);
+        }
+    }
+
+}
+void factorize(int n)
+{
+    for(int i = 0; i < prime.size() && prime[i]*prime[i] <= n; i++)
+    {
+        if(n % prime[i] == 0)
+        {
+            while(n % prime[i] == 0)
+            {
+                n /= prime[i];
+                factors.push_back(prime[i]);
+            }
+        }
+    }
+    if(n != 1)
+    {
+        factors.push_back(n);     //last prime number greater than sqrtn
+    }
+}
+void getPrimes(int n)
+{
+    for(int i = 0; i < prime.size(); i++)
+    {
+        cout << prime[i] << " ";
+    }
+    cout << endl;
+    for(int i = 0; i < factors.size(); i++)
+    {
+        cout << factors[i] << " ";
+    }
+    cout << endl;
+}
+
+int main()
+{
+    int n, t;
+    cin >> n;
+    primeSieve(n);
+    factorize(n);
+    getPrimes(n);
+    return 0;
+}
