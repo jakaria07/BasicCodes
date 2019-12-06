@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define eps 1e-9
+int numberDigit(int n)
+{
+    int res = log10(n) + 1 + eps;
+    return res;
+}
+int factorialDigit(int n)
+{
+    double x = 0;
+    for(int i = 1; i <= n; i++)
+    {
+        x += log10(i);
+    }
+    int res = x + 1 + eps;
+    return res;
+}
+int factorialDigit_baseConv(int n, int b)
+{
+    double x = 0;
+    for(int i = 1; i <= n; i++)
+    {
+        x += log10(i)/log10(b); //base conversion
+    }
+    int res = x + 1 + eps;
+    return res;
+}
+int main()
+{
+    int n, b, t;
+    cin >> t;
+    for(int i = 1; i <= t; i++)
+    {
+        cin >> n >> b;
+        cout << factorialDigit_baseConv(n, b) << endl;
+    }
+
+    //cout << numberDigit(n) << endl;
+    //cout << factorialDigit(n) << endl;
+    return 0;
+}
