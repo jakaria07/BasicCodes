@@ -36,6 +36,10 @@ void factorize(int n)
 {
     for(int i = 0; i < prime.size() && prime[i]*prime[i] <= n; i++)
     {
+        if(sieve[n] == 0)
+        {
+            break;
+        }
         if(n % prime[i] == 0)
         {
             while(n % prime[i] == 0)
