@@ -25,7 +25,7 @@ void primeSieve(int n)
     }
     for(int i = 3; i <= n; i += 2)
     {
-        if(sieve[i] == 0)
+        if(sieve[i] == 0)                
         {
             prime.push_back(i);
         }
@@ -36,7 +36,7 @@ void factorize(int n)
 {
     for(int i = 0; i < prime.size() && prime[i]*prime[i] <= n; i++)
     {
-        if(sieve[n] == 0)
+        if(sieve[n] == 0)                //Will work only if sieve can be generate upto N
         {
             break;
         }
