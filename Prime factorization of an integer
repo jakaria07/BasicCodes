@@ -1,59 +1,60 @@
 #include<bits/stdc++.h>
 using namespace std;
-const ll SIZE = 1e8+5;
-vector<int> prime;
-vector<int> factors;
-long long sieve[SIZE];
 
-void primeSieve(int n)
+const ll sz = 1e8+5;
+
+vector<ll> prime;
+vector<ll> factors;
+bitset<SIZE> sieve;
+
+void primeSieve()
 {
     sieve[0] = sieve[1] = 1;
     prime.push_back(2);
-    for(int i = 4; i <= n; i += 2)
+    for(ll i = 4; i <= sz; i += 2)
     {
         sieve[i] = 1;
     }
-    for(int i = 3; i*i <= n; i += 2)
+    for(ll i = 3; i <= sz; i += 2)
     {
         if(sieve[i] == 0)
         {
-            for(int j = i*i; j <= n; j += 2*i)
+            for(ll j = i*i; j <= sz; j += (1ll*2*i))
             {
                 sieve[j] = 1;
             }
         }
     }
-    for(int i = 3; i <= n; i += 2)
+    for(ll i = 3; i <= sz; i += (2*1ll))
     {
-        if(sieve[i] == 0)                
+        if(sieve[i] == 0)
         {
             prime.push_back(i);
         }
     }
-
 }
-void factorize(int n)
+
+void factorize(ll n)
 {
-    for(int i = 0; i < prime.size() && prime[i]*prime[i] <= n; i++)
+    ll sq = sqrt(n);
+    for(ll i = 0; i < prime.size() && prime[i] <= sq; i++)
     {
-        if(sieve[n] == 0)                //Will work only if sieve can be generate upto N
+        if(n%prime[i] == 0)
         {
-            break;
-        }
-        if(n % prime[i] == 0)
-        {
-            while(n % prime[i] == 0)
+            while(n%prime[i] == 0)
             {
                 n /= prime[i];
                 factors.push_back(prime[i]);
             }
+            sq = sqrt(n);
         }
     }
     if(n != 1)
     {
-        factors.push_back(n);     //last prime number greater than sqrtn
+        factors.push_back(n);
     }
 }
+
 void getPrimes(int n)
 {
     for(int i = 0; i < prime.size(); i++)
@@ -70,9 +71,9 @@ void getPrimes(int n)
 
 int main()
 {
-    int n, t;
+    int n;
     cin >> n;
-    primeSieve(n);
+    primeSieve();
     factorize(n);
     getPrimes(n);
     return 0;
