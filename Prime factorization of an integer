@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define SIZE 100000
+const ll SIZE = 1e8+5;
 vector<int> prime;
 vector<int> factors;
 long long sieve[SIZE];
